@@ -34,14 +34,21 @@ const AdvertisementOrdered = () => {
   return (
     <div>
       <form className="formClass" ref={formRef} onSubmit={handleSubmit}>
-        <input type="text" name="location" value={adLocation || ''} readOnly />
+        <h1>טופס הזמנת פרסומת</h1>
+        <input
+          type="text"
+          name="location"
+          style={{ display: "none" }}
+          value={adLocation || ""}
+          readOnly
+        />
         <div>
           <label>כמה ביקורים הנך רוצה</label>
           <input type="text" name="desiredVisits" />
         </div>
         <div>
-          <label>בחר תמונה</label>
-          <select name="path" id="path">
+          <label> בחר תמונה: </label>
+          <select className="chooseAnImage" name="path" id="path">
             <option value="1.jpg">1</option>
             <option value="2.jpg">2</option>
             <option value="3.jpg">3</option>
@@ -53,7 +60,7 @@ const AdvertisementOrdered = () => {
             <option value="9.jpg">9</option>
           </select>
         </div>
-        <button type="submit">invite</button>
+        <button type="submit">שליחה</button>
       </form>
     </div>
   );

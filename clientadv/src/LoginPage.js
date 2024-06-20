@@ -1,53 +1,53 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import "./login-page.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [status,setStatus]=useState('login')
-  const navigate = useNavigate()
-const [systemMessage,setsystemMessage]=useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [status, setStatus] = useState("login");
+  const navigate = useNavigate();
+  const [systemMessage, setsystemMessage] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(status==='login'){
+    if (status === "login") {
       try {
-        const response = await axios.post('http://localhost:8080/users/find', {
+        const response = await axios.post("http://localhost:8080/users/find", {
           email,
-          password
+          password,
         });
         console.log(response, "response");
         // ניתן לטפל בתשובה מהשרת כאן, למשל:
 
         if (response.data === true) {
-          setsystemMessage('המשתמש רשום');
-          navigate("/dash/orders")}    
+          setsystemMessage("המשתמש רשום");
+          navigate("/dash/orders");
+        }
       } catch (error) {
-        setsystemMessage('המשתמש לא רשום');
+        setsystemMessage("המשתמש לא רשום");
       }
     }
-    
-    
-if(status==='register'){
-    try {
-      const response = await axios.post(' http://localhost:8080/users/add', {
-        email,
-        password
-      });
-      // ניתן לטפל בתשובה מהשרת כאן, למשל:
-      if (response.status === 200) {
-        setsystemMessage(response.data)
-      }
 
-    } catch (error) {
-      setsystemMessage(error.response.data)
-    }}
-  }
-const onChangeEmailFunc=(e)=>{
-  setsystemMessage('')
-  setEmail(e.target.value)
-}
+    if (status === "register") {
+      try {
+        const response = await axios.post(" http://localhost:8080/users/add", {
+          email,
+          password,
+        });
+        // ניתן לטפל בתשובה מהשרת כאן, למשל:
+        if (response.status === 200) {
+          setsystemMessage(response.data);
+        }
+      } catch (error) {
+        setsystemMessage(error.response.data);
+      }
+    }
+  };
+  const onChangeEmailFunc = (e) => {
+    setsystemMessage("");
+    setEmail(e.target.value);
+  };
   return (
     <div className="login-page">
       <form className="login-page-form" onSubmit={handleSubmit}>
@@ -59,9 +59,9 @@ const onChangeEmailFunc=(e)=>{
           id="email"
           placeholder="מייל"
           value={email}
-          onChange={onChangeEmailFunc }
+          onChange={onChangeEmailFunc}
         />
-       <input
+        <input
           type="password"
           required
           name="password"
@@ -70,14 +70,18 @@ const onChangeEmailFunc=(e)=>{
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-{systemMessage && <h1 style={{ color: 'red' }}>{systemMessage}</h1>}
+        {systemMessage && <h1 style={{ color: "red" }}>{systemMessage}</h1>}
 
         <button type="submit">כניסה</button>
       </form>
-      {status === 'register' && <button onClick={() => setStatus('login')}>login</button>}
-{status === 'login' && <button onClick={() => setStatus('register')}>register</button>}
-  </div>
+      {status === "register" && (
+        <button onClick={() => setStatus("login")}>login</button>
+      )}
+      {status === "login" && (
+        <button onClick={() => setStatus("register")}>register</button>
+      )}
+    </div>
   );
-}
+};
 
 export default LoginPage;

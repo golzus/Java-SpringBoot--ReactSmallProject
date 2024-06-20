@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import LoginPage from './LoginPage';
-import AdvertisementTypeModal from './AdvertisementTypeModal';
+import React, { useState } from "react";
+import LoginPage from "./LoginPage";
 
 const MainContent = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [advertisementTypeSelected, setAdvertisementTypeSelected] = useState(false);
+  const [advertisementTypeSelected, setAdvertisementTypeSelected] =
+    useState(false);
   const [showLoginPage, setShowLoginPage] = useState(false);
 
   const handleAreaClick = () => {
@@ -28,11 +28,11 @@ const MainContent = () => {
     <div>
       {!advertisementTypeSelected && (
         <div onClick={handleAreaClick}>
-          Click here to {loggedIn ? 'select advertisement type' : 'login/register'}
+          Click here to{" "}
+          {loggedIn ? "select advertisement type" : "login/register"}
         </div>
       )}
       {showLoginPage && <LoginPage onSuccess={handleLoginSuccess} />}
-      {advertisementTypeSelected && <AdvertisementTypeModal />}
     </div>
   );
 };
