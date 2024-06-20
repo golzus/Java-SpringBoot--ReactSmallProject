@@ -1,0 +1,16 @@
+.AdvertisementsPageContent{
+    background-color: chartreuse;
+    display: flex;
+    width: 40vw;
+    justify-content: center;
+    align-items: center;
+    
+}
+.btnAdvertiseHere{
+    background-color: rgb(190, 237, 142);
+    width: 30vw;
+    font-size: 200%;
+    background-color: rgb(78, 134, 21);
+    cursor: pointer;
+
+}
